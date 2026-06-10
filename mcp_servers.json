@@ -1,12 +1,25 @@
 {
-    "mcp_servers": {
-      "time": {
-        "command": "uvx",
-        "args": ["mcp-server-time", "--local-timezone=Asia/Shanghai"]
-      },
-      "ddg-search": {
-        "command": "uvx",
-        "args": ["duckduckgo-mcp-server"]
-      }
+  "mcp_servers": {
+    "time": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-time",
+        "--local-timezone=Asia/Seoul"
+      ]
+    },
+    "ddg-search": {
+      "command": "uvx",
+      "args": [
+        "duckduckgo-mcp-server"
+      ]
+    },
+    "computer-control": {
+      "command": "uv",
+      "args": [
+        "run",
+        "python",
+        "mcp_servers/computer_control.py"
+      ]
     }
+  }
 }
