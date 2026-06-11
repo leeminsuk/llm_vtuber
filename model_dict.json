@@ -26,5 +26,107 @@
                 "": 1
             }
         }
+    },
+    {
+        "name": "Haru",
+        "description": "Live2D official free sample model (female). Source: https://github.com/Live2D/CubismWebSamples — Live2D Free Material License.",
+        "url": "/live2d-models/Haru/Haru.model3.json",
+        "kScale": 0.3,
+        "initialXshift": 0,
+        "initialYshift": 0,
+        "idleMotionGroupName": "Idle",
+        "emotionMap": {
+            "neutral": 0,
+            "anger": 6,
+            "disgust": 6,
+            "fear": 4,
+            "joy": 3,
+            "smirk": 2,
+            "sadness": 5,
+            "surprise": 7
+        },
+        "tapMotions": {
+            "Head": {
+                "TapBody": 30
+            },
+            "Body": {
+                "TapBody": 30
+            }
+        }
+    },
+    {
+        "name": "Hiyori",
+        "description": "Live2D official free sample model (female). Source: https://github.com/Live2D/CubismWebSamples — Live2D Free Material License.",
+        "url": "/live2d-models/Hiyori/Hiyori.model3.json",
+        "kScale": 0.3,
+        "initialXshift": 0,
+        "initialYshift": 0,
+        "idleMotionGroupName": "Idle",
+        "emotionMap": {
+            "neutral": 0,
+            "anger": 0,
+            "disgust": 0,
+            "fear": 0,
+            "joy": 0,
+            "smirk": 0,
+            "sadness": 0,
+            "surprise": 0
+        },
+        "tapMotions": {
+            "Body": {
+                "TapBody": 30
+            }
+        }
+    },
+    {
+        "name": "Rice",
+        "description": "Live2D official free sample model (female). Source: https://github.com/Live2D/CubismWebSamples — Live2D Free Material License.",
+        "url": "/live2d-models/Rice/Rice.model3.json",
+        "kScale": 0.3,
+        "initialXshift": 0,
+        "initialYshift": 0,
+        "idleMotionGroupName": "Idle",
+        "emotionMap": {
+            "neutral": 0,
+            "anger": 0,
+            "disgust": 0,
+            "fear": 0,
+            "joy": 0,
+            "smirk": 0,
+            "sadness": 0,
+            "surprise": 0
+        },
+        "tapMotions": {
+            "Body": {
+                "TapBody": 30
+            }
+        }
+    },
+    {
+        "name": "Ren",
+        "description": "Live2D official free sample model (female). Source: https://github.com/Live2D/CubismWebSamples — Live2D Free Material License.",
+        "url": "/live2d-models/Ren/Ren.model3.json",
+        "kScale": 0.3,
+        "initialXshift": 0,
+        "initialYshift": 0,
+        "idleMotionGroupName": "Idle",
+        "emotionMap": {
+            "neutral": 0,
+            "anger": 3,
+            "disgust": 3,
+            "fear": 2,
+            "joy": 1,
+            "smirk": 1,
+            "sadness": 2,
+            "surprise": 4
+        },
+        "tapMotions": {
+            "Head": {
+                "TapBody": 30
+            },
+            "Body": {
+                "TapBody": 30
+            }
+        }
     }
 ]
