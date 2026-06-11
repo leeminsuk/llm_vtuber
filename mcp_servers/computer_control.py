@@ -58,7 +58,9 @@ def _ocr(png_bytes: bytes) -> list[dict]:
     request.setUsesLanguageCorrection_(True)
     ok = handler.performRequests_error_([request], None)
     if not ok:
-        raise RuntimeError("Vision OCR request failed (check Screen Recording permission)")
+        raise RuntimeError(
+            "Vision OCR request failed (check Screen Recording permission)"
+        )
     results = []
     for obs in request.results() or []:
         candidates = obs.topCandidates_(1)
@@ -69,7 +71,8 @@ def _ocr(png_bytes: bytes) -> list[dict]:
             {
                 "text": str(candidates[0].string()),
                 "x": bbox.origin.x,
-                "y": 1.0 - (bbox.origin.y + bbox.size.height),  # flip to top-left origin
+                "y": 1.0
+                - (bbox.origin.y + bbox.size.height),  # flip to top-left origin
                 "w": bbox.size.width,
                 "h": bbox.size.height,
             }
