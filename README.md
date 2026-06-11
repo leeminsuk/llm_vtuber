@@ -12,7 +12,7 @@
 |------|------|
 | 🇰🇷 한국어 대화 | sherpa-onnx SenseVoice ASR(한국어 인식, 오프라인) + 한국어 페르소나 + edge-tts 한국어 음성 |
 | 🎙️ 음성 대화 | 브라우저 마이크 입력(Silero VAD) → ASR → LLM → TTS 음성 출력. 발화 중 끼어들기 지원 |
-| 👧 캐릭터 5종 스위칭 | 무료(공식 샘플) 여성 Live2D 모델 — 설정 → Character Preset 클릭 한 번으로 모델+음성+성격 전환 |
+| 👧 캐릭터 5종 스위칭 | 화면 상단 **퀵스위치 버튼 바** — 칩 하나 누르면 모델+음성+성격이 즉시 전환 (설정 메뉴 불필요) |
 | 🔊 무료 음성 5종 | 캐릭터마다 다른 무료 edge-tts 음성 (SunHi / Ava / Emma / Seraphina / Vivienne) |
 | 🖱️ 화면 조작 | "○○ 클릭해줘" → OCR로 화면 텍스트 좌표를 찾아 마우스 클릭·키 입력·타이핑·스크롤 수행 |
 | 👀 화면 분석 | 스크린샷 → 로컬 비전 모델(gemma3)이 틀린 부분을 짚고 정답 설명. 비전 모델 불능 시 OCR 폴백 |
@@ -34,9 +34,8 @@
 ## 빠른 시작
 
 ```bash
-# 0. 사전 준비: uv, ollama
-ollama pull qwen3:4b    # 대화 + 도구 호출
-ollama pull gemma3:4b   # 화면 분석(비전)
+# 0. 사전 준비: uv, ollama ≥ 0.30
+ollama pull gemma4:12b  # 대화 + 도구 호출 + 화면 분석(비전) 통합 단일 모델
 
 # 1. 설치
 git clone --recursive https://github.com/leeminsuk/llm_vtuber
@@ -66,9 +65,27 @@ uv run run_server.py
 
 - 클릭 좌표는 LLM이 추측하지 않습니다 — macOS Vision OCR(한/영)이 화면 텍스트의
   실제 좌표를 계산해 주고(`find_text_on_screen`), 클릭은 그 좌표로만 수행합니다.
-- `analyze_screen`은 스크린샷을 로컬 ollama 비전 모델(`OLLAMA_VISION_MODEL`, 기본 gemma3:4b)에
+- `analyze_screen`은 스크린샷을 로컬 ollama 비전 모델(`OLLAMA_VISION_MODEL`, 기본 gemma4:12b)에
   보내 "내가 뭘 틀렸는지" 판단·설명을 받습니다. 비전 모델이 죽어 있으면 OCR 텍스트로 폴백합니다.
 - 예: *"화면에서 저장 버튼 눌러줘"*, *"내 수학 풀이 봐줘. 틀린 데 있어?"* (ko_sora 추천)
+
+## 캐릭터 퀵스위치 버튼
+
+웹 화면 상단 중앙의 칩 버튼(💁‍♀️ 유나 · 🎮 하나 · 📚 소라 · 💻 린 · 🐱 마오)을 누르면
+Live2D 모델·음성·페르소나가 한 번에 바뀝니다. 서버가 `index.html`에 `web_tool/quickswitch.js`를
+주입해 앱의 웹소켓으로 설정 다이얼로그와 동일한 `switch-config` 메시지를 보내는 방식이라
+프론트엔드 빌드는 건드리지 않습니다.
+
+## Pet Mode (데스크톱 펫)
+
+Pet mode(투명 배경·항상 위에 떠 있는 캐릭터)는 브라우저가 아닌 **데스크톱 앱 전용**입니다.
+
+```bash
+bash scripts/install_desktop_app.sh   # macOS arm64, /Applications에 설치
+```
+
+서버 실행 상태에서 `open-llm-vtuber-electron.app`을 열고 좌측 상단 모드 메뉴 → **Pet**을 선택하세요.
+브라우저에서는 동일 버튼이 "Pet mode is only available in the desktop application" 안내만 띄웁니다.
 
 ## 테스트
 
