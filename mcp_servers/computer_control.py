@@ -30,7 +30,7 @@ from mcp.server.fastmcp import FastMCP
 pyautogui.FAILSAFE = True  # slam cursor into a screen corner to abort
 
 OLLAMA_BASE_URL = os.environ.get("OLLAMA_BASE_URL", "http://localhost:11434")
-VISION_MODEL = os.environ.get("OLLAMA_VISION_MODEL", "gemma3:4b")
+VISION_MODEL = os.environ.get("OLLAMA_VISION_MODEL", "gemma4:12b")
 OCR_LANGUAGES = ["ko-KR", "en-US"]
 MAX_IMAGE_WIDTH = 1600  # downscale screenshots sent to the vision model
 

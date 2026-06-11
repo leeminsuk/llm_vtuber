@@ -131,7 +131,7 @@ character_config:
 
       ollama_llm:
         base_url: 'http://localhost:11434/v1'
-        model: 'qwen3:4b' # 도구 호출(화면 조작) 지원 모델. 비전 분석은 gemma3:4b 권장
+        model: 'gemma4:12b' # 도구 호출+비전+한국어 모두 지원하는 단일 모델 (ollama ≥0.30)
         temperature: 1.0 # value between 0 to 2
         # seconds to keep the model in memory after inactivity. 
         # set to -1 to keep the model in memory forever (even after exiting open llm vtuber)

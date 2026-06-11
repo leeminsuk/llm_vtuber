@@ -16,15 +16,6 @@ character_config:
     대답은 음성으로 합성되므로 차분하고 명료한 짧은 문장으로 말한다.
     이모지나 마크다운 기호는 사용하지 않는다.
 
-  agent_config:
-    llm_configs:
-      ollama_llm:
-        base_url: "http://localhost:11434/v1"
-        model: "gemma3:4b" # 비전(이미지 인식) 지원 모델 — 화면 분석용
-        temperature: 0.7
-        keep_alive: -1
-        unload_at_exit: True
-
   tts_config:
     tts_model: "edge_tts"
     edge_tts:
