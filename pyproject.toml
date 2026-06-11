@@ -38,6 +38,10 @@ dependencies = [
     "websocket-client>=1.8.0",
     "letta-client>=0.1.100",
     "duckduckgo-mcp-server>=0.1.1",
+    "pyautogui>=0.9.54",
+    "pillow>=10.0.0",
+    "pyobjc-framework-Vision>=10.0; sys_platform == 'darwin'",
+    "pytest>=8.0.0",
 ]
 
 [project.optional-dependencies]
