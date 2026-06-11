@@ -11,7 +11,7 @@ import shutil
 
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
-from starlette.responses import Response
+from starlette.responses import HTMLResponse, Response
 from starlette.staticfiles import StaticFiles as StarletteStaticFiles
 
 from .routes import init_client_ws_route, init_webtool_routes, init_proxy_route
@@ -51,6 +51,22 @@ class AvatarStaticFiles(CORSStaticFiles):
             return Response("Forbidden file type", status_code=403)
         response = await super().get_response(path, scope)
         return response
+
+
+QUICKSWITCH_TAG = '<script src="/web-tool/quickswitch.js"></script>'
+
+
+def inject_quickswitch(html: str) -> str:
+    """Insert the quick character-switch script before the app bundle.
+
+    Classic scripts execute before module scripts, which lets quickswitch.js
+    wrap window.WebSocket and reuse the app's own /client-ws connection."""
+    marker = '<script type="module"'
+    if QUICKSWITCH_TAG in html:
+        return html
+    if marker in html:
+        return html.replace(marker, f"{QUICKSWITCH_TAG}\n    {marker}", 1)
+    return html.replace("</head>", f"{QUICKSWITCH_TAG}\n</head>", 1)
 
 
 class WebSocketServer:
@@ -140,6 +156,16 @@ class WebSocketServer:
             CORSStaticFiles(directory="web_tool", html=True),
             name="web_tool",
         )
+
+        # Serve index.html with the quick character-switch bar injected.
+        # Registered before the catch-all mount so it takes precedence.
+        @self.app.get("/", response_class=HTMLResponse)
+        async def index_with_quickswitch():
+            with open(os.path.join("frontend", "index.html"), encoding="utf-8") as f:
+                return HTMLResponse(
+                    inject_quickswitch(f.read()),
+                    headers={"Cache-Control": "no-cache"},
+                )
 
         # Mount main frontend last (as catch-all)
         self.app.mount(
