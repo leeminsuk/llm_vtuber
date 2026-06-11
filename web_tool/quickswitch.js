@@ -66,7 +66,8 @@
   const css = `
   #qs-bar {
     position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
-    display: flex; gap: 8px; z-index: 9999;
+    display: flex; gap: 8px; z-index: 9999; align-items: center;
+    max-width: min(92vw, 1100px); overflow-x: auto; scrollbar-width: none;
     padding: 6px 10px; border-radius: 999px;
     background: rgba(15, 18, 28, 0.72);
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
@@ -74,6 +75,14 @@
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
     font-family: -apple-system, "Apple SD Gothic Neo", sans-serif;
   }
+  #qs-bar::-webkit-scrollbar { display: none; }
+  #qs-bar.qs-collapsed .qs-chip:not(.qs-active) { display: none; }
+  .qs-toggle {
+    border: none; background: transparent; cursor: pointer;
+    color: rgba(235, 238, 245, 0.55); font-size: 12px; padding: 4px 6px;
+    flex: none;
+  }
+  .qs-toggle:hover { color: #fff; }
   .qs-chip {
     border: 1px solid transparent; border-radius: 999px;
     padding: 6px 14px; font-size: 13px; font-weight: 600;
@@ -121,6 +130,15 @@
       });
       bar.appendChild(btn);
     }
+    const toggle = document.createElement("button");
+    toggle.className = "qs-toggle";
+    toggle.textContent = "◀";
+    toggle.title = "접기/펼치기";
+    toggle.addEventListener("click", () => {
+      const collapsed = bar.classList.toggle("qs-collapsed");
+      toggle.textContent = collapsed ? "▶" : "◀";
+    });
+    bar.appendChild(toggle);
     document.body.appendChild(bar);
   }
 
